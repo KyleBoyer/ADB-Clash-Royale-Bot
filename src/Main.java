@@ -1,16 +1,14 @@
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.imageio.ImageIO;
-
 public class Main {
+	private static List<String> okColors = Arrays.asList(new String[] { "4eafff", "68bbff", "6abcff", "67baff", "66b9ff", "65b9ff", "69bbff", "4caeff", "48acff", "4badff", "50b0ff", "4aadff", "0054a8", "4daeff", "4fb0ff", "4fafff", "32bcff", "096dd2", "8fb7cb", "61d0ff", "49adff", "a3ddff", "83d5ff", "218df9", "0053a7", "50b8ff", "46aaff", "103860", "004ea4", "2791fe", "3aa2ff", "218cf9", "49acff", "3aa1ff", "0050a0", "4eb5ff", "0053a6", "50b3ff", "50b7ff", "004fa3", "46abff", "49b8ff", "0058ae", "2790ff", "1e8bff", "1b8bfa", "1d87fe", "1b88fd", "1f89fa", "1f8afc" });
 	private static String ADB_DEVICE_IP = "10.0.1.20";
 	private static Point battleTab;
 	private static Point battleButton;
@@ -42,7 +40,7 @@ public class Main {
 		battleButton = new Point((int)(screenSize.x * 0.33), (int)(screenSize.y * 0.65));
 		twoVTwoButton = new Point((int)(screenSize.x * 0.66), (int)(screenSize.y * 0.65));
 		battleChat = new Point((int)(screenSize.x * 0.1), (int)(screenSize.y * 0.85));
-		exitBattle = new Point((int)(screenSize.x * 0.5), (int)(screenSize.y * 0.875));
+		exitBattle = new Point((int)(screenSize.x * 0.5), (int)(screenSize.y * 0.895));
 		exit2v2Battle = new Point((int)(screenSize.x * 0.1), (int)(screenSize.y * 0.95));
 		quick2v2Match = new Point((int)(screenSize.x * 0.66), (int)(screenSize.y * 0.5625));
 		topLeftBattlefield = new Point((int)(screenSize.x * 0.1), (int)(screenSize.y * 0.3));
@@ -85,24 +83,19 @@ public class Main {
 			public void run(){
 				boolean gameEnded = false;
 				while(!gameEnded){
-					InputStream screencap = Utils.run(true, "adb exec-out screencap -p");
+					Utils.run("adb shell rm /sdcard/screen.dump");
+					Utils.run("adb shell screencap /sdcard/screen.dump");
+					Point screenSize = getScreenSize();
+					int offset = screenSize.x*exitBattle.y+exitBattle.x*3;
+					String rgbHex = Utils.run("adb shell dd if=/sdcard/screen.dump bs=4 count=1 skip=" + offset + " 2>/dev/null | hexdump").substring(8, 16).replaceAll(" ","");
+					Utils.run("adb shell rm /sdcard/screen.dump");
 					System.out.println("Analyzing screencap to check if battle is still active.");
-					BufferedImage image;
-					try {
-						image = ImageIO.read(screencap); //Stream is extremely slow
-						int clr =  image.getRGB((int)(image.getWidth() / 2),(int)(image.getHeight() * .895)); 
-						gameEnded = (clr == -11751681 ? true : false);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					gameEnded = okColors.contains(rgbHex);
 				}
 			}
 		};
-		
 		finishedChecker.setDaemon(true);
 		finishedChecker.start();
-		
-		
 		while((new Date(System.currentTimeMillis())).getTime() < endTime.getTime()){ //Battle ends if back button does not exit
 			drag(cards.get(String.valueOf(getRandomNumberInRange(1,4))), randomPoint(), getRandomNumberInRange(100,750));
 			sleep(getRandomNumberInRange(300,1000));
@@ -135,6 +128,8 @@ public class Main {
 			ip = scan.next();
 			scan.close();
 		}
+		Utils.run("adb disconnect");
+		Utils.run("adb kill-server");
 		String connectResult = Utils.run("adb connect " + ip);
 		if(connectResult.contains("connected to ")){
 			System.out.println("Successfully connected to " + ip + "!");
@@ -145,7 +140,8 @@ public class Main {
 		return false;
 	}
 	private static boolean checkClashRoyaleInstalled(){
-		if(Utils.run("adb shell pm list packages").contains("com.supercell.clashroyale")){
+		String packageList = Utils.run("adb shell pm list packages");
+		if(packageList.contains("com.supercell.clashroyale")){
 			return true;
 		}else{
 			System.out.println("Clash Royale is not installed or cannot be found.");
