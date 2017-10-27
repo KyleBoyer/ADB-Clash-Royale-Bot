@@ -2,7 +2,6 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +10,6 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.io.IOUtils;
 public class Main {
 	private static String ADB_DEVICE_IP = "10.0.1.20";
 	private static Point battleTab;
