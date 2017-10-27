@@ -86,15 +86,12 @@ public class Main {
 				boolean gameEnded = false;
 				while(!gameEnded){
 					InputStream screencap = Utils.run(true, "adb exec-out screencap -p");
-					System.out.println("Got screencap.");
+					System.out.println("Analyzing screencap to check if battle is still active.");
 					BufferedImage image;
 					try {
 						image = ImageIO.read(screencap); //Stream is extremely slow
 						int clr =  image.getRGB((int)(image.getWidth() / 2),(int)(image.getHeight() * .895)); 
 						gameEnded = (clr == -11751681 ? true : false);
-						if(gameEnded){
-							System.out.println("Battle ended early due to OK button being found!");
-						}
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -109,7 +106,10 @@ public class Main {
 		while((new Date(System.currentTimeMillis())).getTime() < endTime.getTime()){ //Battle ends if back button does not exit
 			drag(cards.get(String.valueOf(getRandomNumberInRange(1,4))), randomPoint(), getRandomNumberInRange(100,750));
 			sleep(getRandomNumberInRange(300,1000));
-			if(!finishedChecker.isAlive()) break;
+			if(!finishedChecker.isAlive()){
+				System.out.println("Battle ended early due to OK button being found!");
+				break;
+			}
 		}
 		if(twoVTwo) tap(close2v2Chat);
 		tap(battleChat);
