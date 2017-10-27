@@ -36,7 +36,7 @@ public class Main {
 	}
 	private static void initializeButtons(){
 		Point screenSize = getScreenSize();
-		battleTab = new Point((int)(screenSize.x * 0.5), (int)(screenSize.y * 0.98));
+		battleTab = new Point((int)(screenSize.x * 0.5), (int)(screenSize.y * 0.96875));
 		battleButton = new Point((int)(screenSize.x * 0.33), (int)(screenSize.y * 0.65));
 		twoVTwoButton = new Point((int)(screenSize.x * 0.66), (int)(screenSize.y * 0.65));
 		battleChat = new Point((int)(screenSize.x * 0.1), (int)(screenSize.y * 0.85));
