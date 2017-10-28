@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
 	private static List<String> okColors = Arrays.asList(new String[] { "4eafff", "68bbff", "6abcff", "67baff", "66b9ff", "65b9ff", "69bbff", "4caeff", "48acff", "4badff", "50b0ff", "4aadff", "0054a8", "4daeff", "4fb0ff", "4fafff", "32bcff", "096dd2", "8fb7cb", "61d0ff", "49adff", "a3ddff", "83d5ff", "218df9", "0053a7", "50b8ff", "46aaff", "103860", "004ea4", "2791fe", "3aa2ff", "218cf9", "49acff", "3aa1ff", "0050a0", "4eb5ff", "0053a6", "50b3ff", "50b7ff", "004fa3", "46abff", "49b8ff", "0058ae", "2790ff", "1e8bff", "1b8bfa", "1d87fe", "1b88fd", "1f89fa", "1f8afc" });
-	private static String ADB_DEVICE_IP = "10.0.1.20";
+	private static String ADB_DEVICE_IP = "USB";
 	private static Point battleTab;
 	private static Point battleButton;
 	private static Point twoVTwoButton;
@@ -123,19 +123,29 @@ public class Main {
 	private static boolean connectToDevice(){
 		String ip = ADB_DEVICE_IP;
 		if(ip.isEmpty()){
-			System.out.print("Enter IP address to ADB into: ");
+			System.out.print("Enter IP address to ADB into(or type 'usb'): ");
 			Scanner scan = new Scanner(System.in);
 			ip = scan.next();
 			scan.close();
 		}
-		Utils.run("adb disconnect");
-		Utils.run("adb kill-server");
-		String connectResult = Utils.run("adb connect " + ip);
-		if(connectResult.contains("connected to ")){
-			System.out.println("Successfully connected to " + ip + "!");
-			return true;
+		if(!ip.toLowerCase().trim().equals("usb")){
+			Utils.run("adb disconnect");
+			Utils.run("adb kill-server");
+			String connectResult = Utils.run("adb connect " + ip);
+			if(connectResult.contains("connected to ")){
+				System.out.println("Successfully connected to " + ip + "!");
+				return true;
+			}else{
+				System.out.println("An error connecting occurred. The error is:\n" + connectResult);
+			}
 		}else{
-			System.out.println("An error connecting occurred. The error is:\n" + connectResult);
+			String connectResult = Utils.run("adb usb");
+			if(connectResult.contains("restarting in USB mode")){
+				System.out.println("Successfully connected to USB device!");
+				return true;
+			}else{
+				System.out.println("An error connecting occurred. The error is:\n" + connectResult);
+			}
 		}
 		return false;
 	}
@@ -145,6 +155,7 @@ public class Main {
 			return true;
 		}else{
 			System.out.println("Clash Royale is not installed or cannot be found.");
+			System.out.println(packageList);
 		}
 		return false;
 	}
