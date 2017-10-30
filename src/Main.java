@@ -172,8 +172,6 @@ public class Main {
 					String rgbHex2v2 = getPixelColor(true, false, exit2v2Battle);
 					String leftTowerRGB = getPixelColor(true, false, leftTower);
 					String rightTowerRGB = getPixelColor(true, true, rightTower);
-					//System.out.println("Left tower RGB: " + leftTowerRGB + " at " + leftTower.x + "," + leftTower.y);
-					//System.out.println("Right tower RGB: " + rightTowerRGB + " at " + rightTower.x + "," + rightTower.y);
 					if(towerColors.contains(leftTowerRGB)){
 						tsv.setLeftTowerHalf(false);
 						tsv.setLeftTowerDone(false);
@@ -300,9 +298,16 @@ public class Main {
 	    int maxX = bottomRightBattlefield.x;
 	    int maxY = bottomRightBattlefield.y;
 
-	    int rndX = getRandomNumberInRange(minX, maxX);
-	    int rndY = getRandomNumberInRange(minY, maxY);
-	    return new Point(rndX, rndY);
+    	int rndX = getRandomNumberInRange(minX, maxX);
+    	int rndY = getRandomNumberInRange(minY, maxY);
+	    if(tsv != null){
+	    	if(!tsv.getLeftTowerDone() && tsv.getLeftTowerHalf() && !tsv.getRightTowerHalf()){
+	    		rndX = getRandomNumberInRange(minX, maxX/2);
+	    	}else if(!tsv.getRightTowerDone() && tsv.getRightTowerHalf() && !tsv.getLeftTowerHalf()){
+	    		rndX = getRandomNumberInRange(maxX/2, maxX);
+	    	}
+	    }
+    	return new Point(rndX, rndY);
 	}
 	
 	private static int getRandomNumberInRange(int min, int max) {
