@@ -43,7 +43,7 @@ public class Main {
 			launchClashRoyale();
 			System.out.println("App loaded!");
 			initializeButtons();
-			for(int i = 0; i < 1; i++){
+			for(int i = 0; i < 500; i++){
 				openChests();
 				startBattle(false);
 			}
@@ -123,11 +123,13 @@ public class Main {
 		tap(battleTab);
 		boolean first = true;
 		boolean startUnlock = true;
+		boolean chestUnlocked = false;
 		for (Point chest : chestsSide.values()) {
 			String rgbHex = getPixelColor(!first, false, chest);
 			first = false;
 		    if(openChestColors.contains(rgbHex)){
 		    	System.out.println("Opening unlocked chest.");
+		    	chestUnlocked = true;
 		    	for(int i = 0; i <= 12; i++){
 		    		tap(chest);
 		    	}
@@ -138,7 +140,8 @@ public class Main {
 		}
 		if(startUnlock){
 			for(Point chest : chestsMiddle.values()){
-				String rgbHex = getPixelColor(true, false, chest);
+				String rgbHex = getPixelColor(!chestUnlocked, false, chest);
+				chestUnlocked = false;
 				if(!backgroundChests.contains(rgbHex)){
 					System.out.println("Starting chest unlock.");
 					tap(chest);
