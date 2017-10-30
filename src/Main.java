@@ -178,11 +178,11 @@ public class Main {
 					}else if(depletedTowerColors.contains(leftTowerRGB)){
 						tsv.setLeftTowerHalf(true);
 						tsv.setLeftTowerDone(false);
-						System.out.println("Left tower half!" + leftTowerRGB);
+						//System.out.println("Left tower half!" + leftTowerRGB);
 					}else{
 						tsv.setLeftTowerHalf(true);
 						tsv.setLeftTowerDone(true);
-						System.out.println("Left tower done!" + leftTowerRGB);
+						//System.out.println("Left tower done!" + leftTowerRGB);
 					}
 					if(towerColors.contains(rightTowerRGB)){
 						tsv.setRightTowerHalf(false);
@@ -190,11 +190,11 @@ public class Main {
 					}else if(depletedTowerColors.contains(rightTowerRGB)){
 						tsv.setRightTowerHalf(true);
 						tsv.setRightTowerDone(false);
-						System.out.println("Right tower half!" + rightTowerRGB);
+						//System.out.println("Right tower half!" + rightTowerRGB);
 					}else{
 						tsv.setRightTowerHalf(true);
 						tsv.setRightTowerDone(true);
-						System.out.println("Right tower done!" + rightTowerRGB);
+						//System.out.println("Right tower done!" + rightTowerRGB);
 					}
 					gameEnded = okColors.contains(rgbHex) | okColors.contains(rgbHex2v2);
 				}
