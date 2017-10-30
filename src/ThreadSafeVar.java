@@ -21,11 +21,11 @@ public class ThreadSafeVar {
     }
 
     public boolean getLeftTowerHalf() {
-        return leftTowerHalf.getAndSet(null);
+        return leftTowerHalf.get();
     }
     
     public boolean getRightTowerHalf() {
-        return rightTowerHalf.getAndSet(null);
+        return rightTowerHalf.get();
     }
     
     public void setLeftTowerDone(boolean x) {
@@ -36,10 +36,10 @@ public class ThreadSafeVar {
     }
 
     public boolean getLeftTowerDone() {
-        return leftTowerDone.getAndSet(null);
+        return leftTowerDone.get();
     }
     
     public boolean getRightTowerDone() {
-        return rightTowerDone.getAndSet(null);
+        return rightTowerDone.get();
     }
 }
