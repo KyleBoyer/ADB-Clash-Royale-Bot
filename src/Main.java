@@ -3,7 +3,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +62,7 @@ public class Main {
 			initializeButtons();
 			for(int i = 0; i < 500; i++){
 				openChests();
-				startBattle(false);
+				startBattle(true);
 			}
 		}
 		System.out.println("Done.");
@@ -180,7 +182,9 @@ public class Main {
 		    }
 		}
 		if(startUnlock){
-			for(Point chest : chestsMiddle.values()){
+			List<Point> chestsMiddleShuffled = new ArrayList<Point>(chestsMiddle.values());
+			Collections.shuffle(chestsMiddleShuffled);
+			for(Point chest : chestsMiddleShuffled){
 				String rgbHex = getPixelColor(!chestUnlocked, false, chest);
 				chestUnlocked = false;
 				if(!backgroundChests.contains(rgbHex)){
