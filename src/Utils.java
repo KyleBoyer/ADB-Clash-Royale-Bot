@@ -1,6 +1,5 @@
 import java.nio.charset.Charset;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -28,7 +27,7 @@ public class Utils {
             ProcessBuilder pb = new ProcessBuilder(allCommand);
             pb.redirectErrorStream(true);
             Process p = pb.start();
-            p.waitFor(10, TimeUnit.SECONDS);
+            p.waitFor();
             return IOUtils.toString(p.getInputStream(), Charset.defaultCharset());
         } catch (Exception e) {
             e.printStackTrace();
