@@ -1,12 +1,12 @@
 import java.util.concurrent.atomic.AtomicReference;
 
-public class ThreadSafeVar {
+public class ThreadSafeTowerBar {
 	private final AtomicReference<Boolean> leftTowerHalf = new AtomicReference<Boolean>();
 	private final AtomicReference<Boolean> rightTowerHalf = new AtomicReference<Boolean>();
 	private final AtomicReference<Boolean> leftTowerDone = new AtomicReference<Boolean>();
 	private final AtomicReference<Boolean> rightTowerDone = new AtomicReference<Boolean>();
 	
-	public ThreadSafeVar(){
+	public ThreadSafeTowerBar(){
 		this.setLeftTowerDone(false);
 		this.setRightTowerDone(false);
 		this.setLeftTowerHalf(false);
