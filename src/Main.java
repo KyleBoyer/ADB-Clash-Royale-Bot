@@ -435,8 +435,8 @@ public class Main {
 			long startTime = System.currentTimeMillis();
 			while(!consumeStream(executeShell("dumpsys activity top")).contains("android.webkit.WebView")){
 				sleep(1);
-				if((System.currentTimeMillis()-startTime) > 10000){
-					System.out.println("Error launching Clash Royale in 30 seconds.");
+				if((System.currentTimeMillis()-startTime) > 30000){
+					System.out.println("Error launching and loading Clash Royale in 30 seconds. Check if the device is unlocked.");
 					System.exit(1);
 				}
 			}
