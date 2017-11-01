@@ -64,7 +64,7 @@ public class Main {
 			initializeButtons();
 			for(int i = 0; i < 500; i++){
 				openChests();
-				startBattle(true, true);
+				startBattle();
 			}
 		}
 		System.out.println("Done.");
