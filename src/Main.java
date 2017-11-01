@@ -56,17 +56,76 @@ public class Main {
 	private static Map<String, Point> chestsMiddle = new HashMap<String, Point>();
 	private static JadbConnection jadb;
 	private static JadbDevice device;
+	private static Scanner scan;
 	
 	public static void main(String[] args){
+		scan = new Scanner(System.in);
 		if(connectToDevice() && checkClashRoyaleInstalled()){
 			launchClashRoyale();
-			System.out.println("App loaded!");
 			initializeButtons();
-			for(int i = 0; i < 500; i++){
-				openChests();
-				startBattle();
+			boolean exit = false;
+			while(!exit){
+				System.out.println("Please choose a menu option.");
+				System.out.println("1) Battle and Open Chests");
+				System.out.println("2) Battle Only");
+				System.out.println("3) Open Chests Only");
+				System.out.println("4) Exit");
+				System.out.print("> ");
+				int choice = scan.nextInt();
+				switch (choice) {
+	            	case 1:
+	            		System.out.print("How many battles? ");
+	    				int battles = scan.nextInt();
+	            		System.out.print("Play 2v2[no]? ");
+	    				String do2v2 = scan.nextLine();
+	    				do2v2 = (do2v2.trim().isEmpty() ? "n" : do2v2);
+	    				boolean twoVtwo = do2v2.toLowerCase().substring(0,1).equals("y");
+	    				boolean manual2v2 = false;
+	    				if(twoVtwo){
+		            		System.out.print("Play 2v2 manual opponent[no]? ");
+		    				String do2v2manual = scan.nextLine();
+		    				do2v2manual = (do2v2manual.trim().isEmpty() ? "n" : do2v2manual);
+		    				manual2v2 = do2v2manual.toLowerCase().substring(0,1).equals("y");
+	    				}
+	    				for(int i = 0; i < battles; i++){
+	    					openChests();
+	    					startBattle(twoVtwo, manual2v2);
+	    				}
+	                    break;
+	            	case 2:
+	            		System.out.print("How many battles? ");
+	    				int battlesOnly = scan.nextInt();
+	            		System.out.print("Play 2v2[no]? ");
+	    				String do2v2Only = scan.nextLine();
+	    				do2v2Only = (do2v2Only.trim().isEmpty() ? "n" : do2v2Only);
+	    				boolean twoVtwoOnly = do2v2Only.toLowerCase().substring(0,1).equals("y");
+	    				boolean manual2v2Only = false;
+	    				if(twoVtwoOnly){
+		            		System.out.print("Play 2v2 manual opponent[no]? ");
+		    				String do2v2manualOnly = scan.nextLine();
+		    				do2v2manualOnly = (do2v2manualOnly.trim().isEmpty() ? "n" : do2v2manualOnly);
+		    				manual2v2 = do2v2manualOnly.toLowerCase().substring(0,1).equals("y");
+	    				}
+	    				for(int i = 0; i < battlesOnly; i++){
+	    					startBattle(twoVtwoOnly, manual2v2Only);
+	    				}
+	                    break;
+
+	            	case 3:
+	            		openChests();
+	                    break;
+
+	            	case 4:
+	            		exit = true;
+	                    break;
+	                    
+	            	default:
+						System.out.println("Invalid option '" + choice + "'.");
+	                    break;
+				}
 			}
 		}
+		scan.close();
 		System.out.println("Done.");
 		System.exit(0);
 	}
@@ -208,13 +267,6 @@ public class Main {
 		}
 	}
 	
-	private static void startBattle(boolean twoVTwo){
-		startBattle(twoVTwo, false); 
-	}
-	
-	private static void startBattle(){
-		startBattle(false); 
-	}
 	private static void startBattle(boolean twoVTwo, boolean manual2v2){
 		tstb = new ThreadSafeTowerBar();
 		tsebb = new ThreadSafeExitBattleButton();
@@ -306,7 +358,6 @@ public class Main {
 		Utils.run("adb kill-server");
 		Utils.run("adb start-server");
 		jadb = new JadbConnection();
-		Scanner scan = new Scanner(System.in);
 		while(device == null){
 			try {
 				List<JadbDevice> deviceList = jadb.getDevices();
@@ -345,12 +396,10 @@ public class Main {
 				}
 			} catch (Exception e) {
 				System.out.println("An error listing ADB devices occured. The error message is: " + e.getMessage());
-				scan.close();
 				return false;
 			}
 		}
 		System.out.println("Successfully connected to " + device + ".");
-		scan.close();
 		return true;
 	}
 	
@@ -395,6 +444,7 @@ public class Main {
 			System.out.println("Error launching Clash Royale. The error is: " + e.getMessage());
 			System.exit(1);
 		}
+		System.out.println("App loaded!");
 	}
 	
 	private static void sleep(int milliseconds){
