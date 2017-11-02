@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="jars/commons-io-2.6.jar"/>
 	<classpathentry kind="lib" path="jars/commons-lang3-3.6.jar"/>
 	<classpathentry kind="lib" path="jars/commons-codec-1.11.jar"/>
+	<classpathentry kind="lib" path="jars/jgoodies-common-1.8.1.jar"/>
+	<classpathentry kind="lib" path="jars/jgoodies-forms-1.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

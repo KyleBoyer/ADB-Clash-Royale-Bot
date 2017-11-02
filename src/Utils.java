@@ -1,5 +1,6 @@
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Random;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -34,4 +35,12 @@ public class Utils {
             return null;
         }
     }
+    
+    public static int getRandomNumberInRange(int min, int max) {
+		if (min >= max) {
+			throw new IllegalArgumentException("max must be greater than min");
+		}
+		Random r = new Random();
+		return r.nextInt((max - min) + 1) + min;
+	}
 }
