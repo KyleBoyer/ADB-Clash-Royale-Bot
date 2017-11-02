@@ -23,19 +23,19 @@ import javax.swing.text.NumberFormatter;
 
 public class MainWindow {
 
-	private JFrame frame;
-	private JFormattedTextField textField;
-	private JCheckBox chckbxOpenChestsWhen;
-	private JCheckBox chckbxPlayvQuick;
-	private JLabel lblStatus;
+	private JFrame frmClashRoyaleBot;
+	private JFormattedTextField numTimesTextField;
+	private JCheckBox openChestsCheckBox;
+	private JCheckBox play2v2CheckBox;
+	private JLabel statusLabel;
 	private ClashCommands cr;
 	private JFrame parent;
 	private Marquee marquee;
-	private JButton btnCancelTask;
+	private JButton cancelButton;
 	private JButton manual2v2Button;
 	private JButton startButton;
 	private BattleLauncher runningSwingWorker;
-	private JLabel lblWaiting;
+	private JLabel statusTextLabel;
 	private JadbDevice device;
 	
 
@@ -85,15 +85,15 @@ public class MainWindow {
 
 	public void setStatus(String text){
 		if(marquee != null) marquee.stop();
-		lblWaiting.setText(text);
+		statusTextLabel.setText(text);
 		if(text.length() > 40){
-			marquee = new Marquee(lblWaiting, 32);
+			marquee = new Marquee(statusTextLabel, 32);
 			marquee.start();
 		}
 	}
 	
 	public void setCancelable(boolean cancelable){
-		btnCancelTask.setEnabled(cancelable);
+		cancelButton.setEnabled(cancelable);
 		manual2v2Button.setEnabled(!cancelable);
 		startButton.setEnabled(!cancelable);
 	}
@@ -106,8 +106,8 @@ public class MainWindow {
 			return "Clash Royale is not installed or cannot be found on this device.";
 		}
 		new ClashLauncher().execute();
-		this.frame.setLocationRelativeTo(null);
-		this.frame.setVisible(true);
+		this.frmClashRoyaleBot.setLocationRelativeTo(null);
+		this.frmClashRoyaleBot.setVisible(true);
 		return "";
 	}
 
@@ -115,11 +115,12 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 580, 165);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
+		frmClashRoyaleBot = new JFrame();
+		frmClashRoyaleBot.setTitle("Clash Royale Bot");
+		frmClashRoyaleBot.setResizable(false);
+		frmClashRoyaleBot.setBounds(100, 100, 580, 165);
+		frmClashRoyaleBot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmClashRoyaleBot.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("max(28dlu;default)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(112dlu;default)"),
@@ -132,15 +133,15 @@ public class MainWindow {
 				RowSpec.decode("33px"),
 				RowSpec.decode("33px"),}));
 		
-		chckbxOpenChestsWhen = new JCheckBox("Open Chests When Available");
-		chckbxOpenChestsWhen.setSelected(true);
-		frame.getContentPane().add(chckbxOpenChestsWhen, "1, 2, 3, 1, fill, fill");
+		openChestsCheckBox = new JCheckBox("Open Chests When Available");
+		openChestsCheckBox.setSelected(true);
+		frmClashRoyaleBot.getContentPane().add(openChestsCheckBox, "1, 2, 3, 1, fill, fill");
 		
-		chckbxPlayvQuick = new JCheckBox("Play 2v2 Quick Match");
-		frame.getContentPane().add(chckbxPlayvQuick, "5, 2, fill, fill");
+		play2v2CheckBox = new JCheckBox("Play 2v2 Quick Match");
+		frmClashRoyaleBot.getContentPane().add(play2v2CheckBox, "5, 2, fill, fill");
 		
-		JLabel lblHowManyBattles = new JLabel("How Many Battles: ");
-		frame.getContentPane().add(lblHowManyBattles, "1, 3, 3, 1, right, default");
+		JLabel numBattlesLabel = new JLabel("How Many Battles: ");
+		frmClashRoyaleBot.getContentPane().add(numBattlesLabel, "1, 3, 3, 1, right, default");
 		
 		NumberFormat format = NumberFormat.getInstance();
 	    format.setGroupingUsed(false);
@@ -150,11 +151,11 @@ public class MainWindow {
 	    formatter.setMaximum(Integer.MAX_VALUE);
 	    formatter.setAllowsInvalid(true);
 	    formatter.setCommitsOnValidEdit(true);
-		textField = new JFormattedTextField(formatter);
-		textField.setText("1");
-		lblHowManyBattles.setLabelFor(textField);
-		frame.getContentPane().add(textField, "5, 3, fill, default");
-		textField.setColumns(10);
+		numTimesTextField = new JFormattedTextField(formatter);
+		numTimesTextField.setText("1");
+		numBattlesLabel.setLabelFor(numTimesTextField);
+		frmClashRoyaleBot.getContentPane().add(numTimesTextField, "5, 3, fill, default");
+		numTimesTextField.setColumns(10);
 		
 		manual2v2Button = new JButton("Wait For Manual 2v2 Battle To Start");
 		manual2v2Button.addActionListener(new ActionListener() {
@@ -162,21 +163,21 @@ public class MainWindow {
 				try {
 					if(cr.isAppOpen()){
 						setStatus("Starting manual 2v2 battle with selected options.");
-						runningSwingWorker = new BattleLauncher(chckbxOpenChestsWhen.isSelected(),Integer.parseInt(textField.getText()),true, true);
+						runningSwingWorker = new BattleLauncher(openChestsCheckBox.isSelected(),Integer.parseInt(numTimesTextField.getText()),true, true);
 						runningSwingWorker.execute();
 					}else{
-						JOptionPane.showMessageDialog(frame, "Clash Royale app is not open. Please check device.");
+						JOptionPane.showMessageDialog(frmClashRoyaleBot, "Clash Royale app is not open. Please check device.");
 					}
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(frame, "An error has occurred. The error is: " + e1.getMessage());
+					JOptionPane.showMessageDialog(frmClashRoyaleBot, "An error has occurred. The error is: " + e1.getMessage());
 					parent.setVisible(true);
-					frame.setVisible(false);
+					frmClashRoyaleBot.setVisible(false);
 					e1.printStackTrace();
 					
 				}
 			}
 		});
-		frame.getContentPane().add(manual2v2Button, "1, 4, 3, 1, fill, fill");
+		frmClashRoyaleBot.getContentPane().add(manual2v2Button, "1, 4, 3, 1, fill, fill");
 		
 		startButton = new JButton("Start Running");
 		startButton.addActionListener(new ActionListener() {
@@ -184,25 +185,25 @@ public class MainWindow {
 				try {
 					if(cr.isAppOpen()){
 						setStatus("Starting battle with selected options.");
-						runningSwingWorker = new BattleLauncher(chckbxOpenChestsWhen.isSelected(),Integer.parseInt(textField.getText()),chckbxPlayvQuick.isSelected(), false);
+						runningSwingWorker = new BattleLauncher(openChestsCheckBox.isSelected(),Integer.parseInt(numTimesTextField.getText()),play2v2CheckBox.isSelected(), false);
 						runningSwingWorker.execute();
 					}else{
-						JOptionPane.showMessageDialog(frame, "Clash Royale app is not open. Please check device.");
+						JOptionPane.showMessageDialog(frmClashRoyaleBot, "Clash Royale app is not open. Please check device.");
 					}
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(frame, "An error has occurred. The error is: " + e1.getMessage());
+					JOptionPane.showMessageDialog(frmClashRoyaleBot, "An error has occurred. The error is: " + e1.getMessage());
 					parent.setVisible(true);
-					frame.setVisible(false);
+					frmClashRoyaleBot.setVisible(false);
 					e1.printStackTrace();
 					
 				}
 			}
 		});
-		frame.getContentPane().add(startButton, "5, 4, fill, fill");
+		frmClashRoyaleBot.getContentPane().add(startButton, "5, 4, fill, fill");
 		
-		btnCancelTask = new JButton("Cancel Task");
-		btnCancelTask.setEnabled(false);
-		btnCancelTask.addActionListener(new ActionListener() {
+		cancelButton = new JButton("Cancel Task");
+		cancelButton.setEnabled(false);
+		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				runningSwingWorker.cancel(true);
 				setCancelable(false);
@@ -210,12 +211,12 @@ public class MainWindow {
 			}
 		});
 		
-		lblStatus = new JLabel(" Status: ");
-		frame.getContentPane().add(lblStatus, "1, 5, fill, fill");
+		statusLabel = new JLabel(" Status: ");
+		frmClashRoyaleBot.getContentPane().add(statusLabel, "1, 5, fill, fill");
 		
-		lblWaiting = new JLabel("Waiting...");
-		frame.getContentPane().add(lblWaiting, "3, 5, fill, fill");
-		frame.getContentPane().add(btnCancelTask, "5, 5, fill, fill");
+		statusTextLabel = new JLabel("Waiting...");
+		frmClashRoyaleBot.getContentPane().add(statusTextLabel, "3, 5, fill, fill");
+		frmClashRoyaleBot.getContentPane().add(cancelButton, "5, 5, fill, fill");
 	}
 
 }

@@ -23,22 +23,25 @@ import java.awt.event.ActionListener;
 import java.net.InetSocketAddress;
 import java.text.NumberFormat;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ConnectionWindow {
 
-	private JFrame frame;
-	private JFormattedTextField textField;
-	private JComboBox<JadbDevice> comboBox;
+	private JFrame frmConnectToAdb;
+	private JFormattedTextField portTextField;
+	private JComboBox<JadbDevice> deviceComboBox;
 	private JadbConnection jadb;
-	private JTextField textField_1;
+	private JTextField ipAddrTextField;
+	private JButton connectButton;
 
 	public void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					ConnectionWindow window = new ConnectionWindow();
-					window.frame.setLocationRelativeTo(null);
-					window.frame.setVisible(true);
+					window.frmConnectToAdb.setLocationRelativeTo(null);
+					window.frmConnectToAdb.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,11 +56,12 @@ public class ConnectionWindow {
 	private void initialize() {
 		Utils.run("adb start-server");
 		jadb = new JadbConnection();
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 500, 110);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
+		frmConnectToAdb = new JFrame();
+		frmConnectToAdb.setTitle("Connect to ADB Device - Clash Royale Bot");
+		frmConnectToAdb.setResizable(false);
+		frmConnectToAdb.setBounds(100, 100, 500, 110);
+		frmConnectToAdb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmConnectToAdb.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("40px"),
 				ColumnSpec.decode("127px"),
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -84,16 +88,25 @@ public class ConnectionWindow {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblConnectToTcp = new JLabel("Connect to TCP Device: ");
-		frame.getContentPane().add(lblConnectToTcp, "1, 2, 2, 1, right, default");
+		JLabel connectLabel = new JLabel("Connect to TCP Device: ");
+		frmConnectToAdb.getContentPane().add(connectLabel, "1, 2, 2, 1, right, default");
 		
-		textField_1 = new JTextField();
-		textField_1.setToolTipText("Enter a hostname or IP Address");
-		frame.getContentPane().add(textField_1, "4, 2, fill, default");
-		textField_1.setColumns(10);
+		ipAddrTextField = new JTextField();
+		connectLabel.setLabelFor(ipAddrTextField);
+		ipAddrTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					connectButton.doClick();
+				}
+			}
+		});
+		ipAddrTextField.setToolTipText("Enter a hostname or IP Address");
+		frmConnectToAdb.getContentPane().add(ipAddrTextField, "4, 2, fill, default");
+		ipAddrTextField.setColumns(10);
 		
-		JLabel lblPort = new JLabel("Port:");
-		frame.getContentPane().add(lblPort, "6, 2, right, default");
+		JLabel portLabel = new JLabel("Port:");
+		frmConnectToAdb.getContentPane().add(portLabel, "6, 2, right, default");
 		NumberFormat format = NumberFormat.getInstance();
 	    format.setGroupingUsed(false);
 	    NumberFormatter formatter = new NumberFormatter(format);
@@ -102,83 +115,85 @@ public class ConnectionWindow {
 	    formatter.setMaximum(Integer.MAX_VALUE);
 	    formatter.setAllowsInvalid(false);
 	    formatter.setCommitsOnValidEdit(true);
-		textField = new JFormattedTextField(formatter);
-		textField.setText("5555");
-		frame.getContentPane().add(textField, "8, 2, fill, default");
-		textField.setColumns(10);
+		portTextField = new JFormattedTextField(formatter);
+		portLabel.setLabelFor(portTextField);
+		portTextField.setText("5555");
+		frmConnectToAdb.getContentPane().add(portTextField, "8, 2, fill, default");
+		portTextField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Connect");
-		btnNewButton.addActionListener(new ActionListener() {
+		connectButton = new JButton("Connect");
+		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InetSocketAddress inetSocketAddress = new InetSocketAddress(textField_1.getText(),Integer.parseInt(textField.getText()));
+				InetSocketAddress inetSocketAddress = new InetSocketAddress(ipAddrTextField.getText(),Integer.parseInt(portTextField.getText()));
 				try{
 					jadb.connectToTcpDevice(inetSocketAddress);
 					System.out.println("Successfully connected to device at '" + inetSocketAddress.getAddress().getHostAddress() + ":" + inetSocketAddress.getPort() + "'. It has been added to the list if accessible.");
+					ipAddrTextField.setText("");
 					refreshDeviceList();
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(frame, "Cannot connect to device at '" + inetSocketAddress.getAddress().getHostAddress() + ":" + inetSocketAddress.getPort() + "'.");
+					JOptionPane.showMessageDialog(frmConnectToAdb, "Cannot connect to device at '" + inetSocketAddress.getAddress().getHostAddress() + ":" + inetSocketAddress.getPort() + "'.");
 					System.out.println("Cannot connect to device at '" + inetSocketAddress.getAddress().getHostAddress() + ":" + inetSocketAddress.getPort() + "'.");
 				}
 			}
 		});
-		frame.getContentPane().add(btnNewButton, "10, 2");
+		frmConnectToAdb.getContentPane().add(connectButton, "10, 2");
 		
 		JSeparator separator = new JSeparator();
 		separator.setBackground(Color.GRAY);
-		frame.getContentPane().add(separator, "1, 4, 10, 1");
+		frmConnectToAdb.getContentPane().add(separator, "1, 4, 10, 1");
 		
-		JLabel lblChooseDevice = new JLabel("Choose Device: ");
-		lblChooseDevice.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblChooseDevice, "2, 6, left, center");
+		JLabel chooseLabel = new JLabel("Choose Device: ");
+		chooseLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		frmConnectToAdb.getContentPane().add(chooseLabel, "2, 6, left, center");
 		
-		comboBox = new JComboBox<JadbDevice>();
-		comboBox.setToolTipText("If nothing is here, ensure that a device is connect via USB or by TCP(above) and that ADB is started.");
-		comboBox.setMaximumRowCount(5);
-		lblChooseDevice.setLabelFor(comboBox);
-		frame.getContentPane().add(comboBox, "4, 6, left, center");
+		deviceComboBox = new JComboBox<JadbDevice>();
+		deviceComboBox.setToolTipText("If nothing is here, ensure that a device is connect via USB or by TCP(above) and that ADB is started.");
+		deviceComboBox.setMaximumRowCount(5);
+		chooseLabel.setLabelFor(deviceComboBox);
+		frmConnectToAdb.getContentPane().add(deviceComboBox, "4, 6, left, center");
 		
-		JButton btnChoose = new JButton("Choose");
-		btnChoose.addActionListener(new ActionListener() {
+		JButton chooseButton = new JButton("Choose");
+		chooseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBox.getSelectedItem() != null){
-					MainWindow mw = new MainWindow(frame);
+				if(deviceComboBox.getSelectedItem() != null){
+					MainWindow mw = new MainWindow(frmConnectToAdb);
 					try {
-						String startMW = mw.start((JadbDevice) comboBox.getSelectedItem());
+						String startMW = mw.start((JadbDevice) deviceComboBox.getSelectedItem());
 						if(startMW.isEmpty()){
-							frame.setVisible(false);
+							frmConnectToAdb.setVisible(false);
 						}else{
-							JOptionPane.showMessageDialog(frame, startMW);
+							JOptionPane.showMessageDialog(frmConnectToAdb, startMW);
 						}
 					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(frame, "An error has occurred. The error is: " + e1.getMessage());
+						JOptionPane.showMessageDialog(frmConnectToAdb, "An error has occurred. The error is: " + e1.getMessage());
 						e1.printStackTrace();
 					}
 					
 				}else{
-					JOptionPane.showMessageDialog(frame, "Please choose a device from the list!");
+					JOptionPane.showMessageDialog(frmConnectToAdb, "Please choose a device from the list!");
 				}
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Refresh List");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton refreshButton = new JButton("Refresh List");
+		refreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				refreshDeviceList();
 			}
 		});
-		frame.getContentPane().add(btnNewButton_1, "6, 6, 3, 1");
-		frame.getContentPane().add(btnChoose, "10, 6, left, top");
+		frmConnectToAdb.getContentPane().add(refreshButton, "6, 6, 3, 1");
+		frmConnectToAdb.getContentPane().add(chooseButton, "10, 6, left, top");
 		refreshDeviceList();
 	}
 	
 	private void refreshDeviceList(){
-		JadbDevice d = (JadbDevice) comboBox.getSelectedItem();
+		JadbDevice d = (JadbDevice) deviceComboBox.getSelectedItem();
 		try {
-			comboBox.removeAllItems();
+			deviceComboBox.removeAllItems();
 			for(JadbDevice addD : jadb.getDevices()){
-				comboBox.addItem(addD);
+				deviceComboBox.addItem(addD);
 				if(d != null && d.toString().equals(addD.toString())){
-					comboBox.setSelectedItem(addD);
+					deviceComboBox.setSelectedItem(addD);
 				}
 			}
 		} catch (Exception e1) {
