@@ -20,6 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.net.InetSocketAddress;
 import java.text.NumberFormat;
 import java.awt.event.ActionEvent;
@@ -40,6 +42,11 @@ public class ConnectionWindow {
 			public void run() {
 				try {
 					ConnectionWindow window = new ConnectionWindow();
+					window.frmConnectToAdb.addComponentListener(new ComponentAdapter() {
+						public void componentShown(ComponentEvent e) {
+						    window.refreshDeviceList();
+						}
+					});
 					window.frmConnectToAdb.setLocationRelativeTo(null);
 					window.frmConnectToAdb.setVisible(true);
 				} catch (Exception e) {
@@ -186,7 +193,7 @@ public class ConnectionWindow {
 		refreshDeviceList();
 	}
 	
-	private void refreshDeviceList(){
+	public void refreshDeviceList(){
 		JadbDevice d = (JadbDevice) deviceComboBox.getSelectedItem();
 		try {
 			deviceComboBox.removeAllItems();

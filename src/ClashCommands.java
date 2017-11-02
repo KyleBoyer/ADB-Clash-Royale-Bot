@@ -27,6 +27,7 @@ public class ClashCommands {
 	private static List<String> depletedTowerColors = Arrays.asList(new String[] { "424f6d", "4f5675", "4e5674", "4d5674", "4c5a76", "4c5773", "4c5b76", "4d5c77", "4f5d78", "ffc7fe", "ffeaff", "505a76", "505975", "515c7a", "505b75", "525873", "ffffff", "4f5b77", "505c78", "505c77", "505774", "4f5b75", "535e78", "525a78", "3d3836", "a62855", "4f5b78", "4f5775", "535e78", "535974", "505775", "525876", "525d7a", "4b587a", "4f5a77", "4b587e", "4b587b", "4b5a77", "4b5677", "4f5977", "4c5775", "4b587c", "47567d", "4d5b7c", "505974", "515875", "4d597b", "4c587b", "49577c", "4e597b", "48526c", "4c5672", "4b5571", "4c5673", "47506a", "49536e", "4b587d", "4f5873", "4b597b", "525975", "4e597a", "4b5a7c", "4d5776", "4b597d", "4f5876", "4d5673", "4d5979", "44506f", "4d5b7b", "4a577e", "4a5470", "4e5a78", "4b5471", "4f5a7b", "4f5a79", "48567d", "4d5774", "4b5879", "4f5979", "4e5975", "4e5876", "4f5a78", "4d5877", "505875", "484f69", "434f6e", "4a536f", "4d5b7d", "434e6d", "4b5c7a", "4c5b7b", "4d5a7a", "4c5a7b", "4d5775", "4d5c7e", "4f5974", "48567a", "4e5775", "464e66", "46557c", "49577e", "48526d", "465271", "455171", "4b5977", "49546f", "4b5978", "4d5876", "475373", "49506b", "4b5979", "4b5777", "525974", "515974", "4c5b7a", "4b5b7b", "4d556f", "4f5978", "4f5877", "4f5a76", "455170", "4e5977", "4f5a75", "4b5774", "4f587a", "424e6c", "4e556f", "4d5978", "4c5c7b", "45506f", "47597d", "4c5777", "4b5778", "475a7d", "47516b", "4c5677", "495574", "4d5a78", "535a75", "495370", "4d5778", "4d5976", "4b5878", "48577d", "515975", "4a597e", "4e5878", "4b5877", "4d5a79", "505874", "4e5a77", "4b5a78", "515874", "4f5a73", "475475", "475476", "525874", "4d5a77", "4e5776", "485578", "475474", "505873", "4d5878", "4d5678", "485579", "4e5979", "4d597a", "515773", "4c5a7a", "505877", "4d5977", "4c5678", "4e5877", "4e5976", "4f5874", "4f5973", "4c5979", "4b5b7d", "4e5978", "4f5975", "4c5879", "4b5779", "4c5977", "4c587a", "4f5774", "4f5673", "515776", "525875", "4c5a78", "4c5a79", "4f5878", "4e5a7b", "535875", "4c5a77", "465272", "4f5773", "505a74", "505776", "515a74", "505977", "495677", "4a5471", "4a5370", "4a5472", "4a5473", "4a5371", "495471", "46506b", "48597d", "48526e", "4b5574", "4b5674", "4d5a7d", "4c597e", "49587e", "454e66", "4e5c7a", "4d5b7a", "49597e", "4c5674", "4a587e", "465069", "454f69", "475876", "485876", "485875", "485976", "475777", "475676", "444f6e", "465373", "475575", "495977", "495979", "49597a", "485779", "475679", "4a577d", "4a5a7a", "4d5c7c", "495a7a", "4b5a7b", "454e6c", "464f67", "464f68", "444f6d", "515876", "4d5879", "4b5a7a", "4b5675", "4b5671", "4a536e", "4a5570", "4b5570", "495678", "495578", "4d566f", "4d5570", "4d5571", "4d5672", "4c566f", "4d5670", "4f5470", "4f566f", "4e566f", "49526d", "48506a", "49577d", "454d65", "474f67", "475069", "4c5a7e", "4c5776", "464e68", "4c5675", "47557b", "48526b", "4b5470", "4d5a7b", "495579", "495068", "485069", "424d6b", "4e5875", "4c5572", "4e5774", "4f5875", "4d5773" } );
 	private static List<String> towerColors = Arrays.asList(new String[] { "b22757", "ffd8ff", "590808", "b65b72", "e92d65", "e2265e", "e0245c", "da265d", "b42757", "df265d", "c96b87", "cb6d89", "932249", "ca6c88", "d52458", "dd245b", "dd255c", "d52257", "b74669", "d62459", "97214b", "cb6c88", "ce5678", "cb6a89", "b22856", "b9476a", "cb6b87", "cb587a", "b8466a", "d8255b", "cc597b", "cd597b", "d9255b", "d42458", "b42856", "ca6a86", "d42257", "ac2552", "ce2256", "a54162", "a32854", "d1255a", "b02856", "b22656", "af2656", "d8245b", "b42656", "d7255a", "b32755", "c8587c", "d9245b", "de245b", "cd6b8a", "b94c6f", "bf4c6f", "9b395c", "c86985", "cb6a86", "c96985", "bd4a6e", "bc486d", "94224a", "922249", "95214a", "96224a", "ba476b", "8e2349", "cb6988", "cc6d88", "cd6e8a", "a24a6a", "912248", "c76c89", "ce5a7c", "a44a6a", "c66d89", "cd6b8b", "c76a88", "cd6b89", "a44b6a", "c86b86", "cc6e8a", "cf5779" } );
 	private static List<String> elixerColors = Arrays.asList(new String[] { "ff1ce4", "e01cd8", "ba1cb8", "e81cdc", "ff1ee8", "f81ae0", "c61cc2", "ec1cdc", "ff1de4", "ff1ee6", "e31cd9", "ff1eec", "ae1cb4", "e81ce0", "be1cbb", "f84aea", "d31ccb", "eb1ce0", "e41cda", "f036e6", "e81cdd", "ce1cc8", "cc1cc8", "b31cb4", "df1cd7", "d81cd1", "ff1ee9", "ff1de5", "dc1cd4", "ff1fe8", "d31ccf", "e41cdb", "e51cdc", "e41cd8", "ed1cde", "f034e4", "e61cdd", "ec1cde", "d91cd1", "d81cd0", "f41ade", "ff59ec", "ff1eea", "ff1fec", "ec33e3", "ff1deb", "e71cdc", "ce1cc9", "cb1cc7", "f01bdf", "f01ce0", "fc58ec", "ca1cc4", "dc1cd6", "ee2ee4", "d41ccc", "fd1ae4", "ec1cdf", "e31cd8", "f81ade", "d51cd0", "b51cb6", "ff67ee", "bc1cbb", "ff4aec", "c11cbf", "f61adc", "ff1ee4", "ff20ec", "ff1eeb", "f819e0", "f536e4", "e41cdc", "cd1cc9", "d51cce", "f43ee8", "ff1eed", "b91cb8", "c01cbd", "c71cc3", "cc1cc7", "fa1adf", "fd1ae0", "ff35ec", "ff1be3", "fb1ae3", "ed1de0", "fa1ae1", "f81de2", "ee28e0", "fb1ae1", "f028e0", "f024e0", "f021e0", "b01cbf", "b41cb4", "ab1cb7", "a61cb0", "a81cad", "ac1cb0", "f920e4", "c81cc4", "d01cca", "ec2ce4", "ff20e4", "ec21e0", "ec24e2", "ec1de0", "ee23e0", "eb23e1", "fc1ae4", "fc1ee4", "fb27e6", "fa2fe4", "fe1ae4", "ff1ce6", "ab1cb1", "a91cb1", "af1cb7", "b11cbe", "f833e4", "f833e6", "f033e4", "f034e6", "f036e4", "f033e6", "f136e4", "f339e4", "f735e6", "f836e4", "f437e4", "ae1cb0", "b11cb4", "f031e3", "f02ee3", "f02be2", "ee2fe4", "f22fe2", "f32ee4", "f82ce4", "f72de4", "f62de4", "f42ee2", "f02fe4", "ee30e4", "d21cca", "c81cc2", "c41cc0", "b41cb7", "de1cd6", "df1cd8", "ec2ae4", "e91ee0", "e81de0", "f82ae4", "cb1cc4", "fe1be1", "fa18e2", "fa1ade", "f71adc", "f51add", "a61cb5", "a71cb4", "a21caa", "a01ca8", "9c1ca9", "9e1cae", "f41adf", "f31adf", "de1cd7", "e21cd8", "dc1cd2", "d51cd1", "d51ccd", "e51cd9", "e51cdd", "f21ae0", "ee1cdd", "ea1cde", "e81cde", "a71caf", "ac1cad", "f81adb", "f819db", "f81bdc", "f719df", "f41bd9", "f81cdc", "fd19e3", "fb1fe1", "f91bdd", "fc1ae2", "fc19e0", "f419dc", "f41adc", "c41cc2", "d81cd2", "c01cc0", "b81cb4", "b01cb4", "db1cd4", "ef1cdc", "f11bdc", "f019dc", "f01ade", "f01cdd", "cd1cc8", "b71cb5", "bf1cbb", "c01cbf", "af1cb0", "ab1cae", "a71cac", "f034e5", "d21ccb", "ea1ce0", "ea1cdf", "e11cd8", "db1cd6", "a31cac", "a31cb0", "f81ee4", "f81ce4", "f620e4", "f424e0", "f321e0", "f81be0", "ff1be4", "ab1cb8", "ae1cba", "fc1ce4", "ff1ce1", "eb1cdf", "ec1ce0", "a91cb8", "a91cb7", "fb19e3", "ff1ce2", "ff1ae1", "a11cae", "9d1caa", "b31cb5", "aa1cae", "a71cae", "a21cac", "fc1ce2", "fc18e1", "f41ae1", "f61ae1", "f419e0", "f01ae0", "ef1ce0", "f719e0", "f71adf", "fc1ae1", "fb19e0", "f81add", "f819df", "f022e0", "f83ce6", "ff50ec", "ff42ec", "ff51ec", "ff57ec", "ff55ec", "ff3cec", "ff30ec", "be1cc3", "c11cc8", "ff1dec", "ff24ec", "ff5aec", "fc59ec", "f43de8", "f440ea", "f33ce7", "f03ae6", "f038e4", "f743e9", "f848eb", "fb54ec", "fa52ec", "f950ec", "f84cec", "b61cbb", "b61cb6", "f746ea", "f647ea", "f443e8", "f440e8", "f33fe7", "f74ae8", "f84dea", "fc4eeb", "fc4feb", "fa4ee9", "fb4eec", "f33be7", "f03ae5", "d71cd0", "da1cd3", "d21ccc", "ca1cc6", "c21cbe", "e722e0", "e92be0", "f037e5", "ec34e4", "ee34e4", "ec30e0", "f039e4", "f03ae4", "f441e8", "f642e8", "f341e8", "f240e8", "f03ee8", "f645ea", "f749eb", "fb59ed", "fc56ec", "f951ec", "f84fec", "f03be5", "ee39e4", "c31cc2", "df1cd6", "bf1cbc", "c21cc1", "c91ccb", "e51fdc", "e726dc", "ef39e4", "ed38e2", "ec36e0", "eb30e0", "fd5cef", "ff62ed", "d21cce", "d41cd0", "cf1cc8", "be1cbd", "c41cc7", "df1cd4", "e61cda", "ec37e3", "ec34e0", "e830e0", "e828df", "c31ccb", "ff22ee", "ff63f0", "ff5fee", "ff67f0", "ff68ee", "ff66ee", "ff5aee", "ff57ed", "ff2eed", "ff3dec", "ff45ec", "ff51ed", "fd4deb", "ff4dec", "f138e8", "f43ae8", "f035e7", "ef30e4", "ec2ee2", "f43ce5", "f439e4", "f640e6", "f83de8", "f43fe8", "f43ce8", "ec2ce0", "e827e0", "b81cb8", "be1cbe", "b41cb8", "b01cb1", "b31cbb", "c11cc0", "c81cc3", "e820de", "e61cde", "e41cd9", "cb1cc8", "f840e8", "f83ce8", "c31cbf", "c71cc2", "bf1cb9", "b51cb5", "b01cb3", "d41ccf", "e71cdd", "ec2be3", "eb29e2", "eb23e0", "e81edf", "ab1cb3", "b01cba", "fc36e6", "fe34e4", "fc38e4", "fb39e5", "c61ccc", "fc2ce8", "ff21e4", "b71cc3", "ff1fe4", "ff1de8", "ff1ce7", "bb1cc4", "ff21e8", "cb1cc6", "d11cc9", "c41cc1", "b61cb8", "b41cb5", "d71ccd", "da1cd4", "e925df", "e81ede", "e41cde", "e01cd7", "b91cbe", "bd1cc5", "ff42e8", "ff3fe9", "ff44e9", "ff4aeb", "fe4deb", "ff3ce9", "ff35ea", "ff20e8", "ff1de9", "ff23e8", "ff2ce8", "e929e0", "ea2de0", "fd45e9", "fc40e8", "fc46e9", "fc46e8", "fa47e8", "fd3ee9", "ff3ae8", "ff28e8", "ff2ce7", "ff31e7", "ff37e8", "f945e8", "f845e9", "ef35e5", "ed31e4", "ec31e4", "ec2fe3", "f139e6", "f33de7", "f843e8", "f742e8", "f641e8", "f541e8", "ec2fe4" } );
+	private static List<String> joinRequestColors = Arrays.asList(new String[] { "ffbe2b", "ffbe2a", "ffbc28", "b16a02", "ffbd29", "ffba24", "fda207", "d88804", "ff9d00", "ffa114", "ffa105", "b26c03", "b06a02", "ffb21c", "ff920c", "ff9403", "ff9900", "ff9106", "ffbc2a", "ffbc29", "b06800", "ffb11b", "ffbc2b", "ffb722", "ffbc27", "ac6400", "ffb823", "ff8e0a", "ffa011", "ae6900", "ac6600", "aa6400", "fe9800", "ffb11a", "ffbc24", "a86400", "ffbb26", "ac6700", "fe9b00", "ff9b00", "ff8e05", "fe9302", "f09701", "b06a00", "ff9e11", "ffb01a", "ffa206", "ffa006", "ad6800", "af6800", "fa9600", "ffbc26", "fc9600", "ae6800", "ffae19", "ffb723", "f79800", "ffbc2c", "ffb61f", "fe9202", "ffb21d", "fe9f06", "ffa012", "ac6500", "cd8104", "ff900c", "f59800", "f89600", "fe9f03", "ab6700", "ff8f0a", "ff9006", "cf8104", "fd9b00", "cb7f04", "ac6800", "f89900", "f69d06", "ae6400", "ff8f06", "ffb923", "ffba23", "f69e05", "ff980b", "fc9b00", "b26a02", "ffb71f", "ffb51b", "ec9200", "b06900", "c07500", "ffa013", "ffb016", "b16900", "fd9700", "f69c05", "fa9c00", "fd9e00", "f79a00", "dd8a00", "c57a00", "f39700", "f99800", "f99a00", "f89b00", "fc9a00", "ff9c00", "fd9c00", "f49800", "fea106", "ffa203", "fd9e02", "ffa103", "fea206", "ffa106", "fd9f00", "c77a01", "ad6900", "aa6800", "ab6500", "ab6400", "b16a03", "af6c01", "b97000", "b36c00", "a96600", "b16a00", "b06901", "b06b03", "af6400", "b06700", "b06400", "ad6403", "af6700", "b06c00", "af6801", "ad6802", "ae6a00", "be7400", "c37900", "f39804", "ec9500", "e88f00", "e18c00", "f39b04", "f49a05", "f99d06", "f69e07", "f69b05", "dc8900", "d18000", "c97d01", "f89800", "c47a01", "c77901", "cb7e03", "cb7d02", "c27600", "b26d00", "ce8004", "fa9e07", "fd9200", "ffaf15", "ffb017", "ffaa13", "ffa510", "ff9c0c", "ffb31c", "ffb41c", "ff9708", "ffa00e", "ffb41e", "ffb31d", "ffb41b", "ff9409", "fe9307", "fd8f07", "fe9208", "fc9005", "fb9003", "fb9403", "ff9d0d", "ff9d0e", "ffa015", "fe9405", "ffa014", "ff9e10", "ff9e0f", "ffab14", "ffb117", "ffa615", "ffb01b", "ffb81f", "ffae17", "ffa511", "ffba22", "ffa917", "ffab17", "ffb51f", "ffb31e", "ffaa18", "ffbc23", "ffb820", "ffb319", "ff9c0d", "ffa111", "ffb720", "ffb721", "ffb71e", "ffae15", "ffb822", "ffa813", "ffa110", "ffbb27", "ffb924", "ff8f0b", "ff8e0b", "fa9200", "fc9200", "fa9202", "f89200", "fa9101", "fd9202", "fe9201", "ff9404", "f89700", "ff9302", "ff9402", "fd9201", "f89100", "f79100", "fd9600", "fe9700", "f99400", "f69500", "f79600", "ff9800", "ff9a01", "f69200", "f59300", "f59500", "f79700", "f79500", "f79301", "f98c03", "fc8c04", "f98d03", "f99203", "f89201", "fc8e06", "fc8d06", "ff900a", "ff8e0c", "ff9009", "ff8e07", "fe8e09", "ff8e06", "ff8f05", "f88d02", "f88c04", "f78d02", "f78e01", "f89001", "fa8d03", "fd8e04", "ff8e04", "fe8e06", "fe8e04", "fe9002", "f69700" } );
 	private static ThreadSafeTowerBar tstb;
 	private static ThreadSafeExitBattleButton tsebb;
 	private static Point screenSize;
@@ -46,6 +47,7 @@ public class ClashCommands {
 	private static Point leftTower;
 	private static Point rightTower;
 	private static Point inBattleElixerIcon;
+	private static Point joinRequest;
 	private static Map<String, Point> chatOpts = new HashMap<String, Point>();
 	private static Map<String, Point> cards = new HashMap<String, Point>();
 	private static Map<String, Point> chestsSide = new HashMap<String, Point>();
@@ -53,7 +55,7 @@ public class ClashCommands {
 	private JadbDevice device;
 	private MainWindow statusLabel;
 	
-	public ClashCommands(JadbDevice device, MainWindow statusLabel){
+	public ClashCommands(JadbDevice device, MainWindow statusLabel) throws Exception{
 		this.setDevice(device);
 		this.setStatusLabel(statusLabel);
 		this.initializeButtons();
@@ -67,15 +69,11 @@ public class ClashCommands {
 		this.device = d;
 	}
 	
-	private static String consumeStream(InputStream s){
-		try{
-			return IOUtils.toString(s, Charset.defaultCharset());
-		} catch (Exception e){
-			return "";
-		}
+	private static String consumeStream(InputStream s) throws Exception{
+		return IOUtils.toString(s, Charset.defaultCharset());
 	}
 	
-	private void initializeButtons(){
+	private void initializeButtons() throws Exception{
 		screenSize = getScreenSize();
 		battleTab = new Point((int)(screenSize.x * 0.5), (int)(screenSize.y * 0.96875));
 		battleButton = new Point((int)(screenSize.x * 0.33), (int)(screenSize.y * 0.65));
@@ -93,6 +91,7 @@ public class ClashCommands {
 		leftTower = new Point((int)(screenSize.x * 0.24), (int)(screenSize.y * 0.157));
 		rightTower = new Point((int)(screenSize.x * 0.76), (int)(screenSize.y * 0.157));
 		inBattleElixerIcon = new Point((int)(screenSize.x * 0.23), (int)(screenSize.y * 0.98));
+		joinRequest = new Point((int)(screenSize.x * 0.95), (int)(screenSize.y * 0.13));
 		
 		chatOpts.put("happy", new Point((int)(screenSize.x * 0.27), (int)(screenSize.y * 0.8)));
 		chatOpts.put("angry", new Point((int)(screenSize.x * 0.5), (int)(screenSize.y * 0.8)));
@@ -136,35 +135,29 @@ public class ClashCommands {
 		return null;
 	}
 	
-	private String getPixelColor(boolean reuseSS, boolean delete, Point pixel){
-		try{
-			if(consumeStream(executeShell("ls /sdcard/screen.dump")).trim().equals("/sdcard/screen.dump")){
-				if(!reuseSS){
-					consumeStream(executeShell("rm /sdcard/screen.dump"));
-					consumeStream(executeShell("screencap /sdcard/screen.dump"));
-				}
-			}else{
+	private String getPixelColor(boolean reuseSS, boolean delete, Point pixel) throws Exception{
+		if(consumeStream(executeShell("ls /sdcard/screen.dump")).trim().equals("/sdcard/screen.dump")){
+			if(!reuseSS){
+				consumeStream(executeShell("rm /sdcard/screen.dump"));
 				consumeStream(executeShell("screencap /sdcard/screen.dump"));
 			}
-			screenSize = getScreenSize();
-			int offset = screenSize.x*pixel.y+pixel.x+3;
-			InputStream s = executeShell("dd if=/sdcard/screen.dump bs=4 count=1 skip=" + offset + " 2>/dev/null");
-			String rgbHex = Hex.encodeHexString(IOUtils.toByteArray(s));
-			if(rgbHex.length() > 6){
-				rgbHex = rgbHex.substring(0,6);
-			}
-			if(!reuseSS && delete){
-				consumeStream(executeShell("rm /sdcard/screen.dump"));
-			}
-			return rgbHex;
-		}catch (Exception e){
-			System.out.println("Error getting pixel color. The error is: " + e.getMessage());
-			System.exit(1);
-			return null;
+		}else{
+			consumeStream(executeShell("screencap /sdcard/screen.dump"));
 		}
+		screenSize = getScreenSize();
+		int offset = screenSize.x*pixel.y+pixel.x+3;
+		InputStream s = executeShell("dd if=/sdcard/screen.dump bs=4 count=1 skip=" + offset + " 2>/dev/null");
+		String rgbHex = Hex.encodeHexString(IOUtils.toByteArray(s));
+		if(rgbHex.length() > 6){
+			rgbHex = rgbHex.substring(0,6);
+		}
+		if(!reuseSS && delete){
+			consumeStream(executeShell("rm /sdcard/screen.dump"));
+		}
+		return rgbHex;
 	}
 	
-	public void openChests(){
+	public void openChests() throws Exception{
 		if(Thread.currentThread().isInterrupted()) return;
 		tap(battleTab);
 		boolean first = true;
@@ -218,22 +211,30 @@ public class ClashCommands {
 		}
 	}
 	
-	public void startBattle(boolean twoVTwo, boolean manual2v2){
+	public void startBattle(boolean twoVTwo, boolean manual2v2, boolean autoJoin) throws Exception{
 		tstb = new ThreadSafeTowerBar();
 		tsebb = new ThreadSafeExitBattleButton();
+		boolean override2v2 = false;
 		if(Thread.currentThread().isInterrupted()) return;
 		tap(battleTab);
 		if(Thread.currentThread().isInterrupted()) return;
-		tap((twoVTwo ? twoVTwoButton : battleButton));
-		if(manual2v2 && twoVTwo){
+		if(autoJoin && joinRequestColors.contains(getPixelColor(false,true,joinRequest))){
 			if(Thread.currentThread().isInterrupted()) return;
-			statusLabel.setStatus("Waiting for battle to start(manual 2v2 mode selected).");
-			System.out.println("Waiting for battle to start(manual 2v2 mode selected).");
+			override2v2 = true;
+			tap(joinRequest);
 		}else{
 			if(Thread.currentThread().isInterrupted()) return;
-			if(twoVTwo) tap(quick2v2Match);
-			if(Thread.currentThread().isInterrupted()) return;
-			tap(chestsFullYes);
+			tap((twoVTwo ? twoVTwoButton : battleButton));
+			if(manual2v2 && twoVTwo){
+				if(Thread.currentThread().isInterrupted()) return;
+				statusLabel.setStatus("Waiting for battle to start(manual 2v2 mode selected).");
+				System.out.println("Waiting for battle to start(manual 2v2 mode selected).");
+			}else{
+				if(Thread.currentThread().isInterrupted()) return;
+				if(twoVTwo) tap(quick2v2Match);
+				if(Thread.currentThread().isInterrupted()) return;
+				tap(chestsFullYes);
+			}
 		}
 		if(Thread.currentThread().isInterrupted()) return;
 		statusLabel.setStatus("Waiting for battle to start.");
@@ -247,32 +248,37 @@ public class ClashCommands {
 			public void run(){
 				boolean gameEnded = false;
 				while(!gameEnded && !Thread.currentThread().isInterrupted()){
-					String rgbHex = getPixelColor(false, false, exitBattle);
-					String rgbHex2v2 = getPixelColor(true, false, exit2v2Battle);
-					String leftTowerRGB = getPixelColor(true, false, leftTower);
-					String rightTowerRGB = getPixelColor(true, true, rightTower);
-					if(towerColors.contains(leftTowerRGB)){
-						tstb.setLeftTowerHalf(false);
-						tstb.setLeftTowerDone(false);
-					}else if(depletedTowerColors.contains(leftTowerRGB)){
-						tstb.setLeftTowerHalf(true);
-						tstb.setLeftTowerDone(false);
-					}else{
-						tstb.setLeftTowerHalf(true);
-						tstb.setLeftTowerDone(true);
+					try {
+						String rgbHex = getPixelColor(false, false, exitBattle);
+						String rgbHex2v2 = getPixelColor(true, false, exit2v2Battle);
+						String leftTowerRGB = getPixelColor(true, false, leftTower);
+						String rightTowerRGB = getPixelColor(true, true, rightTower);
+						if(towerColors.contains(leftTowerRGB)){
+							tstb.setLeftTowerHalf(false);
+							tstb.setLeftTowerDone(false);
+						}else if(depletedTowerColors.contains(leftTowerRGB)){
+							tstb.setLeftTowerHalf(true);
+							tstb.setLeftTowerDone(false);
+						}else{
+							tstb.setLeftTowerHalf(true);
+							tstb.setLeftTowerDone(true);
+						}
+						if(towerColors.contains(rightTowerRGB)){
+							tstb.setRightTowerHalf(false);
+							tstb.setRightTowerDone(false);
+						}else if(depletedTowerColors.contains(rightTowerRGB)){
+							tstb.setRightTowerHalf(true);
+							tstb.setRightTowerDone(false);
+						}else{
+							tstb.setRightTowerHalf(true);
+							tstb.setRightTowerDone(true);
+						}
+						gameEnded = okColors.contains(rgbHex) | okColors.contains(rgbHex2v2);
+						if(gameEnded) tsebb.setFound(true);
+					} catch (Exception e) {
+						tsebb.setException(e);
+						tstb.setException(e);
 					}
-					if(towerColors.contains(rightTowerRGB)){
-						tstb.setRightTowerHalf(false);
-						tstb.setRightTowerDone(false);
-					}else if(depletedTowerColors.contains(rightTowerRGB)){
-						tstb.setRightTowerHalf(true);
-						tstb.setRightTowerDone(false);
-					}else{
-						tstb.setRightTowerHalf(true);
-						tstb.setRightTowerDone(true);
-					}
-					gameEnded = okColors.contains(rgbHex) | okColors.contains(rgbHex2v2);
-					if(gameEnded) tsebb.setFound(true);
 				}
 			}
 		};
@@ -300,7 +306,7 @@ public class ClashCommands {
 		tap(chatOpts.get("gg"));
 		sleep(1500);
 		if(Thread.currentThread().isInterrupted()) return;
-		tap((twoVTwo ? exit2v2Battle : exitBattle));
+		tap((twoVTwo || override2v2 ? exit2v2Battle : exitBattle));
 		if(Thread.currentThread().isInterrupted()) return;
 		sleep(1500);
 		if(Thread.currentThread().isInterrupted()) return;
@@ -308,22 +314,12 @@ public class ClashCommands {
 		System.out.println("Battle ended and exitted!");
 	}
 	
-	private void drag(Point from, Point where, int milliseconds){
-		try{
-			consumeStream(executeShell("input swipe " + from.x + " " + from.y + " " + where.x + " " + where.y + " " + milliseconds));
-		} catch (Exception e) {
-			System.out.println("An error sending swipe command occurred. The error message is: " + e.getMessage());
-			System.exit(1);
-		}
+	private void drag(Point from, Point where, int milliseconds) throws Exception{
+		consumeStream(executeShell("input swipe " + from.x + " " + from.y + " " + where.x + " " + where.y + " " + milliseconds));
 	}
 	
-	private void tap(Point where){
-		try{
-			consumeStream(executeShell("input tap " + where.x + " " + where.y));
-		} catch (Exception e) {
-			System.out.println("An error sending tap command occurred. The error message is: " + e.getMessage());
-			System.exit(1);
-		}
+	private void tap(Point where) throws Exception{
+		consumeStream(executeShell("input tap " + where.x + " " + where.y));
 	}
 	
 	public boolean checkClashRoyaleInstalled() throws IOException, JadbException{
@@ -337,7 +333,7 @@ public class ClashCommands {
 		return false;
 	}
 	
-	private void waitForInBattle(){
+	private void waitForInBattle() throws Exception{
 		boolean inBattle = false;
 		while(!inBattle && !Thread.currentThread().isInterrupted()){
 			if(Thread.currentThread().isInterrupted()) return;
@@ -348,36 +344,27 @@ public class ClashCommands {
 		}
 	}
 	
-	public boolean isAppOpen() throws IOException, JadbException{
+	public boolean isAppOpen() throws Exception{
 		return consumeStream(executeShell("dumpsys activity top")).contains("android.webkit.WebView");
 	}
 	
-	public void launchClashRoyale() throws IOException, JadbException{
+	public void launchClashRoyale() throws Exception{
 		consumeStream(executeShell("monkey -p com.supercell.clashroyale -c android.intent.category.LAUNCHER 1"));
 	}
 	
-	private static void sleep(int milliseconds){
-		try {
-			if(!Thread.currentThread().isInterrupted()) Thread.sleep(milliseconds);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	private static void sleep(int milliseconds) throws Exception{
+		if(!Thread.currentThread().isInterrupted()) Thread.sleep(milliseconds);
 	}
 	
-	private Point getScreenSize(){
+	private Point getScreenSize() throws Exception{
 		if(screenSize == null){
-			try {
 				String screenSizeRes = consumeStream(executeShell("wm size")).replaceAll("Physical size: ", "").trim();
 				screenSize = new Point(Integer.parseInt(screenSizeRes.split("x")[0]),Integer.parseInt(screenSizeRes.split("x")[1]));
-			} catch (Exception e) {
-				System.out.println("Error getting window size. The error is: " + e.getMessage());
-				System.exit(1);
-			}
 		}
 		return screenSize;
 	}
 	
-	private static Point randomPoint(){
+	private static Point randomPoint() throws Exception{
 	    int minX = topLeftBattlefield.x;
 	    int minY = topLeftBattlefield.y;
 	    int maxX = bottomRightBattlefield.x;
