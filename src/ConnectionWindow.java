@@ -37,6 +37,7 @@ public class ConnectionWindow {
 			public void run() {
 				try {
 					ConnectionWindow window = new ConnectionWindow();
+					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,6 +54,7 @@ public class ConnectionWindow {
 		Utils.run("adb start-server");
 		jadb = new JadbConnection();
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 500, 110);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {

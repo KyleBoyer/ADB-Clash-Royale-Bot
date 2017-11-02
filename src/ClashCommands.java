@@ -165,22 +165,27 @@ public class ClashCommands {
 	}
 	
 	public void openChests(){
+		if(Thread.currentThread().isInterrupted()) return;
 		tap(battleTab);
 		boolean first = true;
 		boolean startUnlock = true;
 		boolean chestUnlocked = false;
 		for (Point chest : chestsSide.values()) {
+			if(Thread.currentThread().isInterrupted()) return;
 			String rgbHex = getPixelColor(!first, false, chest);
 			first = false;
 		    if(openChestColors.contains(rgbHex)){
+				if(Thread.currentThread().isInterrupted()) return;
 				statusLabel.setStatus("Opening unlocked chest.");
 		    	System.out.println("Opening unlocked chest.");
 		    	chestUnlocked = true;
+				if(Thread.currentThread().isInterrupted()) return;
 		    	for(int i = 0; i <= 12; i++){
 		    		tap(chest);
 		    	}
 		    }else if(unlockingChestColors.contains(rgbHex)){
 		    	startUnlock = false;
+				if(Thread.currentThread().isInterrupted()) return;
 				statusLabel.setStatus("Chest unlock already in progress.");
 		    	System.out.println("Chest unlock already in progress.");
 		    }
@@ -190,18 +195,23 @@ public class ClashCommands {
 			List<Point> chestsMiddleShuffled = new ArrayList<Point>(chestsMiddle.values());
 			Collections.shuffle(chestsMiddleShuffled);
 			for(Point chest : chestsMiddleShuffled){
+				if(Thread.currentThread().isInterrupted()) return;
 				String rgbHex = getPixelColor(!chestUnlocked, false, chest);
 				chestUnlocked = false;
 				if(!backgroundChests.contains(rgbHex)){
+					if(Thread.currentThread().isInterrupted()) return;
 					statusLabel.setStatus("Starting chest unlock.");
 					System.out.println("Starting chest unlock.");
+					if(Thread.currentThread().isInterrupted()) return;
 					tap(chest);
+					if(Thread.currentThread().isInterrupted()) return;
 					tap(confirmUnlock);
 					startedUnlock = true;
 					break;
 				}
 			}
 			if(!startedUnlock){
+				if(Thread.currentThread().isInterrupted()) return;
 				statusLabel.setStatus("No chests available to start unlocking.");
 				System.out.println("No chests available to start unlocking.");
 			}
@@ -211,24 +221,32 @@ public class ClashCommands {
 	public void startBattle(boolean twoVTwo, boolean manual2v2){
 		tstb = new ThreadSafeTowerBar();
 		tsebb = new ThreadSafeExitBattleButton();
+		if(Thread.currentThread().isInterrupted()) return;
 		tap(battleTab);
+		if(Thread.currentThread().isInterrupted()) return;
 		tap((twoVTwo ? twoVTwoButton : battleButton));
 		if(manual2v2 && twoVTwo){
-			System.out.println("Waiting for battle to start(manual 2v2 mode selected).");
+			if(Thread.currentThread().isInterrupted()) return;
 			statusLabel.setStatus("Waiting for battle to start(manual 2v2 mode selected).");
+			System.out.println("Waiting for battle to start(manual 2v2 mode selected).");
 		}else{
+			if(Thread.currentThread().isInterrupted()) return;
 			if(twoVTwo) tap(quick2v2Match);
+			if(Thread.currentThread().isInterrupted()) return;
 			tap(chestsFullYes);
 		}
+		if(Thread.currentThread().isInterrupted()) return;
+		statusLabel.setStatus("Waiting for battle to start.");
 		sleep(1000);
 		waitForInBattle();
 		Date endTime = new Date(System.currentTimeMillis()+4*60000);
-		System.out.println("Battle started! Assuming full OT, game ends at " + endTime + ".");
+		if(Thread.currentThread().isInterrupted()) return;
 		statusLabel.setStatus("Battle started! Assuming full OT, game ends at " + endTime + ".");
+		System.out.println("Battle started! Assuming full OT, game ends at " + endTime + ".");
 		Thread finishedChecker = new Thread(){
 			public void run(){
 				boolean gameEnded = false;
-				while(!gameEnded){
+				while(!gameEnded && !Thread.currentThread().isInterrupted()){
 					String rgbHex = getPixelColor(false, false, exitBattle);
 					String rgbHex2v2 = getPixelColor(true, false, exit2v2Battle);
 					String leftTowerRGB = getPixelColor(true, false, leftTower);
@@ -259,8 +277,9 @@ public class ClashCommands {
 			}
 		};
 		finishedChecker.setDaemon(true);
+		if(Thread.currentThread().isInterrupted()) return;
 		finishedChecker.start();
-		while((new Date(System.currentTimeMillis())).getTime() < endTime.getTime()){
+		while((new Date(System.currentTimeMillis())).getTime() < endTime.getTime() && !Thread.currentThread().isInterrupted()){
 			drag(cards.get(String.valueOf(Utils.getRandomNumberInRange(1,4))), randomPoint(), Utils.getRandomNumberInRange(100,750));
 			sleep(Utils.getRandomNumberInRange(300,1000));
 			if(tsebb.getFound()){
@@ -269,14 +288,22 @@ public class ClashCommands {
 				break;
 			}
 		}
+		if(Thread.currentThread().isInterrupted()) return;
 		if(twoVTwo) tap(close2v2Chat);
+		if(Thread.currentThread().isInterrupted()) return;
 		tap(battleChat);
+		if(Thread.currentThread().isInterrupted()) return;
 		tap(chatOpts.get("happy"));
+		if(Thread.currentThread().isInterrupted()) return;
 		tap(battleChat);
+		if(Thread.currentThread().isInterrupted()) return;
 		tap(chatOpts.get("gg"));
 		sleep(1500);
+		if(Thread.currentThread().isInterrupted()) return;
 		tap((twoVTwo ? exit2v2Battle : exitBattle));
+		if(Thread.currentThread().isInterrupted()) return;
 		sleep(1500);
+		if(Thread.currentThread().isInterrupted()) return;
 		statusLabel.setStatus("Battle ended and exitted!");
 		System.out.println("Battle ended and exitted!");
 	}
@@ -312,7 +339,8 @@ public class ClashCommands {
 	
 	private void waitForInBattle(){
 		boolean inBattle = false;
-		while(!inBattle){
+		while(!inBattle && !Thread.currentThread().isInterrupted()){
+			if(Thread.currentThread().isInterrupted()) return;
 			tap(center);
 			String rgb = getPixelColor(false,true,inBattleElixerIcon);
 			inBattle = (elixerColors.contains(rgb));
@@ -330,7 +358,7 @@ public class ClashCommands {
 	
 	private static void sleep(int milliseconds){
 		try {
-			Thread.sleep(milliseconds);
+			if(!Thread.currentThread().isInterrupted()) Thread.sleep(milliseconds);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
