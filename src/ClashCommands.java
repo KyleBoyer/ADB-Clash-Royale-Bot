@@ -224,6 +224,8 @@ public class ClashCommands {
 			statusLabel.setStatus("Auto-joining battle request.");
 			System.out.println("Auto-joining battle request.");
 			tap(joinRequest);
+			if(Thread.currentThread().isInterrupted()) return;
+			tap(chestsFullYes);
 		}else{
 			if(Thread.currentThread().isInterrupted()) return;
 			tap((twoVTwo ? twoVTwoButton : battleButton));
