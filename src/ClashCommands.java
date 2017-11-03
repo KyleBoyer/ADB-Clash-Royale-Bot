@@ -216,19 +216,21 @@ public class ClashCommands {
 		tsebb = new ThreadSafeExitBattleButton();
 		boolean override2v2 = false;
 		if(Thread.currentThread().isInterrupted()) return;
-		tap(battleTab);
+		tap(battleTab, battleTab);
 		if(Thread.currentThread().isInterrupted()) return;
 		if(autoJoin && joinRequestColors.contains(getPixelColor(false,true,joinRequest))){
 			if(Thread.currentThread().isInterrupted()) return;
 			override2v2 = true;
+			statusLabel.setStatus("Auto-joining battle request.");
+			System.out.println("Auto-joining battle request.");
 			tap(joinRequest);
 		}else{
 			if(Thread.currentThread().isInterrupted()) return;
 			tap((twoVTwo ? twoVTwoButton : battleButton));
 			if(manual2v2 && twoVTwo){
 				if(Thread.currentThread().isInterrupted()) return;
-				statusLabel.setStatus("Waiting for battle to start(manual 2v2 mode selected).");
-				System.out.println("Waiting for battle to start(manual 2v2 mode selected).");
+				statusLabel.setStatus("Waiting 30 seconds for battle to start(manual 2v2 mode selected).");
+				System.out.println("Waiting 30 seconds for battle to start(manual 2v2 mode selected).");
 			}else{
 				if(Thread.currentThread().isInterrupted()) return;
 				if(twoVTwo) tap(quick2v2Match);
@@ -307,8 +309,16 @@ public class ClashCommands {
 		consumeStream(executeShell("input swipe " + from.x + " " + from.y + " " + where.x + " " + where.y + " " + milliseconds));
 	}
 	
-	private void tap(Point where) throws Exception{
-		consumeStream(executeShell("input tap " + where.x + " " + where.y));
+	private void tap(Point... where) throws Exception{
+		String command = "";
+		for(Point w : where){
+			if(command.isEmpty()){
+				command = "input tap " + w.x + " " + w.y;
+			}else{
+				command += " && input tap " + w.x + " " + w.y;
+			}
+		}
+		consumeStream(executeShell(command));
 	}
 	
 	public boolean checkClashRoyaleInstalled() throws IOException, JadbException{
@@ -324,7 +334,8 @@ public class ClashCommands {
 	
 	private void waitForInBattle() throws Exception{
 		boolean inBattle = false;
-		while(!inBattle && !Thread.currentThread().isInterrupted()){
+		Date endTime = new Date(System.currentTimeMillis()+30000);
+		while(!inBattle && !Thread.currentThread().isInterrupted() && (new Date(System.currentTimeMillis())).getTime() < endTime.getTime()){
 			if(Thread.currentThread().isInterrupted()) return;
 			tap(center);
 			String rgb = getPixelColor(false,true,inBattleElixerIcon);
