@@ -299,7 +299,7 @@ public class ClashCommands {
 			}
 		}
 		if(Thread.currentThread().isInterrupted()) return;
-		tap((twoVTwo || override2v2 ? exit2v2Battle : exitBattle));
+		tap(exit2v2Battle, exitBattle);
 		if(Thread.currentThread().isInterrupted()) return;
 		sleep(1500);
 		if(Thread.currentThread().isInterrupted()) return;
