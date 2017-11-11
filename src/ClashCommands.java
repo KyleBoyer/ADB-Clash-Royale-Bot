@@ -214,13 +214,11 @@ public class ClashCommands {
 	public void startBattle(boolean twoVTwo, boolean manual2v2, boolean autoJoin) throws Exception{
 		tstb = new ThreadSafeTowerBar();
 		tsebb = new ThreadSafeExitBattleButton();
-		boolean override2v2 = false;
 		if(Thread.currentThread().isInterrupted()) return;
 		tap(battleTab, battleTab);
 		if(Thread.currentThread().isInterrupted()) return;
 		if(autoJoin && joinRequestColors.contains(getPixelColor(false,true,joinRequest))){
 			if(Thread.currentThread().isInterrupted()) return;
-			override2v2 = true;
 			statusLabel.setStatus("Auto-joining battle request.");
 			System.out.println("Auto-joining battle request.");
 			tap(joinRequest);
@@ -299,7 +297,7 @@ public class ClashCommands {
 			}
 		}
 		if(Thread.currentThread().isInterrupted()) return;
-		tap(exit2v2Battle, exitBattle);
+		tap(exitBattle, exit2v2Battle);
 		if(Thread.currentThread().isInterrupted()) return;
 		sleep(1500);
 		if(Thread.currentThread().isInterrupted()) return;
